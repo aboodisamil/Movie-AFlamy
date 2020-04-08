@@ -20,7 +20,7 @@
                 <input type="text" name="name" value="{{old('name', $category->name) }}" class="form-control">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-edit"> EDIT></i></button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-edit"> EDIT</i></button>
             </div>
         </form>
     </div>

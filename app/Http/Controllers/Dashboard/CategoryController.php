@@ -11,7 +11,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories=Category::paginate(5);
+        $categories=Category::WhenSearch(request()->search)->paginate(5);
         return view('dashboard.categories.index' , compact('categories'));
     }
 
@@ -29,7 +29,7 @@ class CategoryController extends Controller
         ]);
 
         Category::create($request->all());
-        session()->flash('Added','THE DATA ADDED SUCCESSFULLY');
+        session()->flash('Added','Data Added Successfully');
         return redirect()->route('dashboard.categories.index');
     }
 
@@ -52,7 +52,7 @@ class CategoryController extends Controller
         ]);
 
         $category->update($request->all());
-        session()->flash('Added','THE DATA UPDATED SUCCESSFULLY');
+        session()->flash('Added','Data Updated Successfully');
         return redirect()->route('dashboard.categories.index');
 
     }
@@ -61,7 +61,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        session()->flash('Added','THE DATA DELETED SUCCESSFULLY');
+        session()->flash('Added','Data Removed Successfully');
         return redirect()->back();
 
     }

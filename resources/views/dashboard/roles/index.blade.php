@@ -1,10 +1,10 @@
 @extends('layouts.dashboard.app')
 @section('content')
-    <h2 style="font-family: Andalus">Category</h2>
+    <h2 style="font-family: Andalus">Role</h2>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard.welcome') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Category</li>
+            <li class="breadcrumb-item active">Role</li>
         </ol>
     </nav>
 
@@ -23,7 +23,7 @@
 
                     <div class="col-md-4">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search">SEARCH</i></button>
-                        <a href="{{ route('dashboard.categories.create') }}" class="btn btn-primary"><i class="fa fa-plus">ADD</i></a>
+                        <a href="{{ route('dashboard.roles.create') }}" class="btn btn-primary"><i class="fa fa-plus">ADD</i></a>
                     </div>
                     </form>
                 </div>{{--end of row--}}
@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        @if($categories->count() >0)
+                        @if($roles->count() >0)
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -41,14 +41,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as$i=>$category)
+                            @foreach($roles as$i=>$role)
 
                                 <tr>
                                     <td>{{$i++  }}</td>
-                                    <td>{{$category->name }}</td>
+                                    <td>{{$role->name }}</td>
                                     <td >
-                                        <a  href="{{ route('dashboard.categories.edit' , $category->id) }}" class="btn btn-warning"><i class="fa fa-edit"> Edit</i></a>
-                                        <form style="display: inline-block" action="{{ route('dashboard.categories.destroy', $category->id) }}" method="post">
+                                        <a  href="{{ route('dashboard.roles.edit' , $role->id) }}" class="btn btn-warning"><i class="fa fa-edit"> Edit</i></a>
+                                        <form style="display: inline-block" action="{{ route('dashboard.roles.destroy', $role->id) }}" method="post">
                                             {{ method_field('delete') }}
                                             @csrf
                                             <button type="submit" class="btn btn-danger delete"><i class="fa fa-trash"> Delete</i></button>
@@ -59,7 +59,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                            {{ $categories->appends(request()->query())->links() }}
+                            {{ $roles->appends(request()->query())->links() }}
 
                         @else
                             <h2 style="font-family: 'Arabic Typesetting'; font-weight: 400; text-align: center ">Not Found Any Data</h2>
