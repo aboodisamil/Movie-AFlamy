@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Socialite;
 
 class LoginController extends Controller
 {
@@ -37,4 +38,29 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    public function redirectToProvider($provider)
+    {
+        config([
+            'services.'.$provider.'.client_id'=>setting('facebook_client_id') ,
+                'services.'.$provider.'.client_secret'=>setting('facebook_client_secret') ,
+            'services.'.$provider.'.redirect'=>setting('facebook_client_redirect')
+        ]);
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+
+        // $user->token;
+    }
+
+
 }

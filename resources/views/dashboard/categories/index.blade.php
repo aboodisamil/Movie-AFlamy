@@ -23,7 +23,14 @@
 
                     <div class="col-md-4">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search">SEARCH</i></button>
+
+                        @if(auth()->user()->haspermission('create_categories'))
+
                         <a href="{{ route('dashboard.categories.create') }}" class="btn btn-primary"><i class="fa fa-plus">ADD</i></a>
+                         @else
+                            <a  href="#" class="btn disabled btn-primary"><i class="fa fa-plus">ADD</i></a>
+
+                        @endif
                     </div>
                     </form>
                 </div>{{--end of row--}}
@@ -47,12 +54,30 @@
                                     <td>{{$i++  }}</td>
                                     <td>{{$category->name }}</td>
                                     <td >
+
+
+                                        @if(auth()->user()->haspermission('update_categories'))
+
                                         <a  href="{{ route('dashboard.categories.edit' , $category->id) }}" class="btn btn-warning"><i class="fa fa-edit"> Edit</i></a>
+                                        @else
+
+                                            <a  href="#" class="btn disabled btn-warning"><i class="fa fa-edit"> Edit</i></a>
+
+                                        @endif
+
+
+                                        @if(auth()->user()->haspermission('delete_categories'))
+
                                         <form style="display: inline-block" action="{{ route('dashboard.categories.destroy', $category->id) }}" method="post">
                                             {{ method_field('delete') }}
                                             @csrf
                                             <button type="submit" class="btn btn-danger delete"><i class="fa fa-trash"> Delete</i></button>
                                         </form>
+
+                                            @else
+                                                <button type="submit" class="btn btn-danger disabled"><i class="fa fa-trash"> Delete</i></button>
+
+@endif
                                     </td>
 
                                 </tr>

@@ -31,7 +31,7 @@
 
                     <tbody>
                     @php
-                        $models=['users' ,'categories' ]
+                        $models=['users' ,'categories' ,'roles']
                     @endphp
 
                     @foreach($models as $index =>$model)

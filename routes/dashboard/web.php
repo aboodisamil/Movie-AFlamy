@@ -11,6 +11,11 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth' , 'role:admin
     Route::resource('categories' , 'CategoryController');
     //Route contoller route
     Route::resource('roles' , 'RoleController');
+    Route::resource('users' , 'UserController');
+    Route::get('settings/social_login' , 'SettingController@social_login')->name('settings.social_login');
+    Route::get('settings/social_links' , 'SettingController@social_links')->name('settings.social_link');
+    Route::post('settings/' , 'SettingController@store')->name('settings.store');
+
 });
 
 

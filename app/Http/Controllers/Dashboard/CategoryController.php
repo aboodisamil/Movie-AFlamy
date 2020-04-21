@@ -9,6 +9,15 @@ use Illuminate\Validation\Rule;
 class CategoryController extends Controller
 {
 
+    public function __construct()
+{
+    $this->middleware(['permission:read_categories'])->only('index');
+    $this->middleware(['permission:create_categories'])->only('create');
+    $this->middleware(['permission:delete_categories'])->only('destroy');
+    $this->middleware(['permission:update_categories'])->only('edit');
+
+}
+
     public function index()
     {
         $categories=Category::WhenSearch(request()->search)->paginate(5);

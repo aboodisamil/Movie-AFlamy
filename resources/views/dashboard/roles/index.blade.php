@@ -23,7 +23,14 @@
 
                     <div class="col-md-4">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search">SEARCH</i></button>
+
+                        @if(auth()->user()->haspermission('create_roles'))
+
                         <a href="{{ route('dashboard.roles.create') }}" class="btn btn-primary"><i class="fa fa-plus">ADD</i></a>
+                       @else
+                            <a href="#" class="btn disabled btn-primary"><i class="fa fa-plus">ADD</i></a>
+                        @endif
+
                     </div>
                     </form>
                 </div>{{--end of row--}}
@@ -37,6 +44,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>permissions</th>
+                                <th>Count</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -46,13 +55,38 @@
                                 <tr>
                                     <td>{{$i++  }}</td>
                                     <td>{{$role->name }}</td>
+                                    <td>
+                                        @foreach($role->permissions as $per)
+                                            <h5 style="display: inline-block">
+                                                <i class="badge badge-info">{{ $per->name }}</i>
+                                            </h5>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                       {{$role->users_count}}
+                                    </td>
                                     <td >
+
+                                        @if(auth()->user()->haspermission('update_roles'))
+
                                         <a  href="{{ route('dashboard.roles.edit' , $role->id) }}" class="btn btn-warning"><i class="fa fa-edit"> Edit</i></a>
-                                        <form style="display: inline-block" action="{{ route('dashboard.roles.destroy', $role->id) }}" method="post">
+
+                                      @else
+                                            <a  href="#" class="btn disabled btn-warning"><i class="fa fa-edit"> Edit</i></a>
+
+                                        @endif
+                                            @if(auth()->user()->haspermission('delete_roles'))
+
+                                            <form style="display: inline-block" action="{{ route('dashboard.roles.destroy', $role->id) }}" method="post">
                                             {{ method_field('delete') }}
                                             @csrf
                                             <button type="submit" class="btn btn-danger delete"><i class="fa fa-trash"> Delete</i></button>
                                         </form>
+
+                                                @else
+                                                <button type="submit" class="btn disabled btn-danger"><i class="fa fa-trash"> Delete</i></button>
+
+                                                @endif
                                     </td>
 
                                 </tr>
