@@ -31,17 +31,23 @@
 
                     <tbody>
                     @php
-                        $models=['users' ,'categories' ,'roles']
+                        $models=['users' ,'categories' ,'roles' , 'movies' ,'settings']
                     @endphp
 
                     @foreach($models as $index =>$model)
                         <tr>
                             <td>{{ $index+1 }}</td>
                             <td>{{ $model }}</td>
-                            <td>
+                            <td class="text-capitalize">
                                 @php
                                     $per_map=['create','read','update','delete']
                                 @endphp
+                                @if($model == 'settings')
+                                    @php
+                                        $per_map=['create','read']
+
+                                    @endphp
+                                @endif
                                 <select name="persmissions[]" class="select2 form-control" multiple>
                                     @foreach($per_map as $per)
                                         <option value="{{$per.'_'.$model  }}">{{$per  }}</option>

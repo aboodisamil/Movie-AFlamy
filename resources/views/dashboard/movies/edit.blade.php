@@ -4,20 +4,20 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard.welcome') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active"><a href="{{ route('dashboard.roles.index') }}">Role</a></li>
-            <li class="breadcrumb-item active">Edit Role</li>
+            <li class="breadcrumb-item active"><a href="{{ route('dashboard.movies.index') }}">Movie</a></li>
+            <li class="breadcrumb-item active">Edit Movie</li>
 
         </ol>
     </nav>
 
     <div class="tile mb-4">
-        <form action="{{route('dashboard.roles.update',$role->id) }}" method="post">
+        <form action="{{route('dashboard.movies.update',$movie->id) }}" method="post">
             @csrf
             @method('put')
             @include('dashboard.pariales.error')
             <div class="form-group">
                 <label >Name :</label>
-                <input type="text" name="name" value="{{old('name', $role->name) }}" class="form-control">
+                <input type="text" name="name" value="{{old('name', $movie->name) }}" class="form-control">
             </div>
             <div class="form-group">
                 <h4>Persmissions :</h4>
@@ -30,7 +30,7 @@
 
                     <tbody>
                     @php
-                        $models=['users' ,'categories' ,'roles' , 'movies' ,'settings']
+                        $models=['users' ,'categories' ]
                     @endphp
 
                     @foreach($models as $index =>$model)
@@ -41,15 +41,9 @@
                                 @php
                                     $per_map=['create','read','update','delete']
                                 @endphp
-                                @if($model == 'settings')
-                                   @php
-                                       $per_map=['create','read']
-
-                                   @endphp
-                                 @endif
                                 <select   name="persmissions[]" class="select2 form-control" multiple>
                                     @foreach($per_map as $per)
-                                        <option {{ $role->hasPermission($per.'_'.$model) ? 'selected':'' }}
+                                        <option {{ $movie->hasPermission($per.'_'.$model) ? 'selected':'' }}
                                                 value="{{$per.'_'.$model  }}">{{$per  }}</option>
                                     @endforeach
                                 </select>

@@ -23,7 +23,7 @@
         @endif
 
         @if(auth()->user()->haspermission('read_roles'))
-            <li><a class="app-menu__item" href="{{ route('dashboard.roles.index') }}"><i class="app-menu__icon fa fa-gears"></i><span class="app-menu__label">Role</span></a></li>
+            <li><a class="app-menu__item" href="{{ route('dashboard.roles.index') }}"><i class="app-menu__icon fa fa-anchor"></i><span class="app-menu__label">Role</span></a></li>
 
         @endif
 
@@ -31,6 +31,12 @@
             <li><a class="app-menu__item" href="{{ route('dashboard.users.index') }}"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">User</span></a></li>
 
         @endif
+
+        @if(auth()->user()->haspermission('read_movies'))
+            <li><a class="app-menu__item" href="{{ route('dashboard.movies.index') }}"><i class="app-menu__icon fa fa-play"></i><span class="app-menu__label">Movie</span></a></li>
+
+        @endif
+
         @if(auth()->user()->haspermission('read_settings'))
 
        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-gear"></i><span class="app-menu__label">Settings</span><i class="treeview-indicator fa fa-angle-right"></i></a>

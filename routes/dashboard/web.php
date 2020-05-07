@@ -9,6 +9,11 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth' , 'role:admin
 
    //cateogry route
     Route::resource('categories' , 'CategoryController');
+
+    Route::resource('movies' , 'MovieController');
+
+
+
     //Route contoller route
     Route::resource('roles' , 'RoleController');
     Route::resource('users' , 'UserController');

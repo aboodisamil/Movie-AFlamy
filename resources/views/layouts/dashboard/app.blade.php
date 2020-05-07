@@ -23,13 +23,14 @@
     <link rel="stylesheet" type="text/css"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="{{ asset('dashboard_files/js/jquery-3.3.1.min.js') }} "></script>
+    <script src="{{ asset('custome/movie.js') }} "></script>
 
     <style>
         label {
             font-weight: bold;
         }
     </style>
-
+@stack('styles')
 </head>
 <body class="app sidebar-mini">
 <!-- Navbar-->

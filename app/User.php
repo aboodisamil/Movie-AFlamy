@@ -56,7 +56,6 @@ class User extends Authenticatable
         });
     }
 
-
     public  function scopeWhereRoleNot($query, $role_name)//name or id
     {
         return $query->whereHas('roles' , function ($q) use ($role_name){
